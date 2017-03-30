@@ -1,3 +1,3 @@
-:warning 開発中
+開発中です
 # mac-countdown-timer
 Macのステータスバーでカウントダウンするタイマー
