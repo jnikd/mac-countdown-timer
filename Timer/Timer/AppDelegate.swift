@@ -11,16 +11,18 @@ import Cocoa
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
     
-    public let statusItem = NSStatusBar.system().statusItem(withLength: NSVariableStatusItemLength)
-    let popover = NSPopover()
+    private let statusItem = NSStatusBar.system().statusItem(withLength: NSVariableStatusItemLength)
+    private let popover: NSPopover = {
+        $0.contentViewController = CustomViewController(nibName: "CustomViewController", bundle: nil)
+        return $0
+    }(NSPopover())
     
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         statusItem.action = #selector(AppDelegate.togglePopover(_:))
-        popover.contentViewController = CustomViewController(nibName: "CustomViewController", bundle: nil)
-        
         togglePopover(self)
     }
     
+    /// ポップオーバーの表示をトグル
     func togglePopover(_ sender: Any) {
         if popover.isShown {
             popover.performClose(sender)
@@ -29,6 +31,13 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                 popover.show(relativeTo: button.bounds, of: button, preferredEdge: NSRectEdge.minY)
             }
         }
+    }
+    
+    /// ステータスバーの表示を更新
+    ///
+    /// - Parameter string: 表示する文字列
+    func update(string: String)  {
+        statusItem.title = string
     }
 }
 
