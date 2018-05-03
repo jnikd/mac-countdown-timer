@@ -14,10 +14,10 @@ class CustomViewController: NSViewController {
     @IBOutlet weak var to: NSTextField!
     @IBOutlet weak var from: NSTextField!
     @IBAction func quit(_ sender: NSButton) {
-        NSApplication.shared().terminate(self)
+        NSApplication.shared.terminate(self)
     }
     
-    private lazy var appDelegate: AppDelegate = NSApplication.shared().delegate as! AppDelegate
+    private lazy var appDelegate: AppDelegate = NSApplication.shared.delegate as! AppDelegate
     private var timer: Timer?
     
     private let dateFormatter: DateFormatter = {
@@ -35,7 +35,7 @@ class CustomViewController: NSViewController {
         timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(CustomViewController.update), userInfo: nil, repeats: true)
     }
     
-    func update(){
+    @objc func update(){
         let dateString = dateFormatter.string(from: Date())
         let toTimeString = to.stringValue
         let fromTimeString = from.stringValue

@@ -11,9 +11,9 @@ import Cocoa
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
     
-    private let statusItem = NSStatusBar.system().statusItem(withLength: NSVariableStatusItemLength)
+    private let statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
     private let popover: NSPopover = {
-        $0.contentViewController = CustomViewController(nibName: "CustomViewController", bundle: nil)
+        $0.contentViewController = CustomViewController(nibName: NSNib.Name(rawValue: "CustomViewController"), bundle: nil)
         return $0
     }(NSPopover())
     
@@ -23,7 +23,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
     
     /// ポップオーバーの表示をトグル
-    func togglePopover(_ sender: Any) {
+    @objc func togglePopover(_ sender: Any) {
         if popover.isShown {
             popover.performClose(sender)
         } else {
