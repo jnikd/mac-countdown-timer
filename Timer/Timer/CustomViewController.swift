@@ -40,7 +40,10 @@ class CustomViewController: NSViewController {
         let toTimeString = to.stringValue
         let fromTimeString = from.stringValue
         let toTime = dateTimeFormatter.date(from: dateString + " " + toTimeString)
-        let fromTime = dateTimeFormatter.date(from: dateString + " " + fromTimeString)
+        var fromTime = dateTimeFormatter.date(from: dateString + " " + fromTimeString)
+        if fromTime == nil {
+            fromTime = dateTimeFormatter.date(from: dateTimeFormatter.string(from: Date()))
+        }
         
         let resultString: String = (toTime != nil && fromTime != nil)
             ? {
